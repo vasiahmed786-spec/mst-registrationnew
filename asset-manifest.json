@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/vasiahmed786-spec/mst-registrationnew/static/js/main.63784128.js",
-    "index.html": "/vasiahmed786-spec/mst-registrationnew/index.html",
-    "main.63784128.js.map": "/vasiahmed786-spec/mst-registrationnew/static/js/main.63784128.js.map"
+    "main.js": "/mst-registrationnew/static/js/main.63784128.js",
+    "index.html": "/mst-registrationnew/index.html",
+    "main.63784128.js.map": "/mst-registrationnew/static/js/main.63784128.js.map"
   },
   "entrypoints": [
     "static/js/main.63784128.js"
