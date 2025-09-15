@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { FormProvider } from "./FormContext";
 
-function App() {
+// Pages
+import MobilePage from "./pages/MobilePage";
+import AadhaarPage from "./pages/AadhaarPage";
+import ProfileFormPage from "./pages/ProfileFormPage";
+import PanCardPage from "./pages/PanCardPage";
+import ProfilePage from "./pages/ProfilePage";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FormProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MobilePage />} />
+          <Route path="/aadhaar" element={<AadhaarPage />} />
+          <Route path="/profile" element={<ProfileFormPage />} />
+          <Route path="/pan" element={<PanCardPage />} />
+          <Route path="/profile-view" element={<ProfilePage />} />
+        </Routes>
+      </Router>
+    </FormProvider>
   );
 }
-
-export default App;
