@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFormData } from "../FormContext";
+import { FormContext } from "../FormContext";
 import FormCard from "../components/FormCard";
 import FormInput from "../components/FormInput";
 
 export default function MobilePage() {
   const [mobile, setMobile] = useState("");
+  const { formData, setFormData } = useContext(FormContext);
   const navigate = useNavigate();
-  const { update } = useFormData();
 
   const onOk = () => {
-    if (!mobile) {
-      alert("Enter mobile number");
-      return;
-    }
-    update({ mobile });
+  if (!/^\d{10}$/.test(mobile)) {
+    alert("Enter a valid 10-digit mobile number");
+    return;
+  }
+    // Save into global formData
+    setFormData({ ...formData, mobile });
     navigate("/aadhaar");
   };
 
@@ -24,7 +25,8 @@ export default function MobilePage() {
         label="Mobile Number"
         value={mobile}
         onChange={(e) => setMobile(e.target.value)}
-        placeholder=""
+        placeholder="Enter your 10-digit number"
+         maxLength={10}
       />
       <div style={{ textAlign: "center" }}>
         <button
@@ -44,3 +46,4 @@ export default function MobilePage() {
     </FormCard>
   );
 }
+

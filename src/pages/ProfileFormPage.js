@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFormData } from "../FormContext";
+import { FormContext } from "../FormContext";
 import FormCard from "../components/FormCard";
 import FormInput from "../components/FormInput";
 
 export default function ProfileFormPage() {
   const navigate = useNavigate();
-  const { update } = useFormData();
+  const { formData, setFormData } = useContext(FormContext);
 
   const [form, setForm] = useState({
     fullName: "",
@@ -26,11 +26,26 @@ export default function ProfileFormPage() {
   };
 
   const onRegister = () => {
-    if (!form.fullName || !form.email || !form.password) {
-      alert("Please fill required fields: Full Name, Email, Password");
-      return;
-    }
-    update(form);
+  if (!form.fullName) {
+    alert("Full Name is required");
+    return;
+  }
+  if (!/^\d{6}$/.test(form.pincode)) {
+    alert("Enter a valid 6-digit Pin Code");
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    alert("Enter a valid Email address");
+    return;
+  }
+  if (
+    !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(form.password)
+  ) {
+    alert("Password must be at least 8 characters, include upper/lowercase, number, and special character");
+    return;
+  }
+    // Save into global formData
+    setFormData({ ...formData, ...form });
     navigate("/pan"); // ✅ goes directly to PAN page
   };
 
@@ -101,13 +116,16 @@ export default function ProfileFormPage() {
       <FormInput
         label="Password"
         name="password"
+        type="password"
         value={form.password}
         onChange={handleChange}
         placeholder="******"
+         maxLength={20}
       />
       <FormInput
         label="Email Address"
         name="email"
+        type="email"
         value={form.email}
         onChange={handleChange}
         placeholder="you@example.com"

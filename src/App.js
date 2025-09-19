@@ -2,14 +2,13 @@ import React from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { FormProvider } from "./FormContext";
 
-// Pages
 import MobilePage from "./pages/MobilePage";
 import AadhaarPage from "./pages/AadhaarPage";
 import ProfileFormPage from "./pages/ProfileFormPage";
 import PanCardPage from "./pages/PanCardPage";
 import ProfilePage from "./pages/ProfilePage";
 
-export default function App() {
+function App() {
   return (
     <FormProvider>
       <Router>
@@ -24,3 +23,5 @@ export default function App() {
     </FormProvider>
   );
 }
+
+export default App;

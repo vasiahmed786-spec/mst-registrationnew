@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useFormData } from "../FormContext";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { FormContext } from "../FormContext";
 import FormCard from "../components/FormCard";
 import FormInput from "../components/FormInput";
 import { BrowserProvider, Contract } from "ethers";
 
-// Replace with your deployed MST Testnet contract address
-const CONTRACT_ADDRESS = "0xYOUR_DEPLOYED_CONTRACT_ADDRESS";
+// deployed MST Testnet contract address
+const CONTRACT_ADDRESS = "0x206719C0D1408Be5543482f89aBeeA5Fb582d209";
 
 // ABI for getProfile function
 const CONTRACT_ABI = [
@@ -14,13 +14,13 @@ const CONTRACT_ABI = [
 ];
 
 export default function ProfilePage() {
-  const { data } = useFormData();
+  const { formData } = useContext(FormContext);
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
-      if (!window.ethereum || !data.walletAddress) return;
+      if (!window.ethereum || !formData.walletAddress) return;
       try {
         const provider = new BrowserProvider(window.ethereum, {
           chainId: 4545,
@@ -29,7 +29,7 @@ export default function ProfilePage() {
         const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         // Call getProfile from blockchain
-        const p = await contract.getProfile(data.walletAddress);
+        const p = await contract.getProfile(formData.walletAddress);
 
         setProfile({
           // BasicInfo
@@ -60,13 +60,13 @@ export default function ProfilePage() {
     };
 
     fetchProfile();
-  }, [data.walletAddress]);
+  }, [formData.walletAddress]);
 
-  const display = profile || data;
+  const display = profile || formData;
 
   return (
     <FormCard title="User Profile">
-      <FormInput label="Wallet Address" value={data.walletAddress || "Not connected"} readOnly />
+      <FormInput label="Wallet Address" value={formData.walletAddress || "Not connected"} readOnly />
       <FormInput label="Mobile" value={display.mobile} readOnly />
       <FormInput label="Aadhaar" value={display.aadhaar} readOnly />
       <FormInput label="Full Name" value={display.fullName} readOnly />
@@ -77,8 +77,8 @@ export default function ProfilePage() {
       <FormInput label="Address Line 2" value={display.address2} readOnly />
       <FormInput label="Pin Code" value={display.pincode} readOnly />
       <FormInput label="Referral Code" value={display.referral} readOnly />
-      <FormInput label="Password" value={display.password} readOnly />
-      <FormInput label="Email" value={display.email} readOnly />
+      <FormInput label="Password" type="password" value={display.password} readOnly />
+      <FormInput label="Email" type="email" value={display.email} readOnly />
       <FormInput label="PAN" value={display.pan} readOnly />
 
       {display.registeredAt && (

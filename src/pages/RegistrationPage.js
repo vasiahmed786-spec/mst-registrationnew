@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BrowserProvider } from "ethers";
-import { useFormData } from "../FormContext";
+import { import React, { useContext } from "react";
+import { FormContext } from "../FormContext"; } from "../FormContext";
 import FormCard from "../components/FormCard";
 import FormInput from "../components/FormInput";
 
 export default function RegistrationPage() {
-  const { data, update } = useFormData();
+  const { data, update } = import React, { useContext } from "react";
+import { FormContext } from "../FormContext";();
   const [wallet, setWallet] = useState("");
   const navigate = useNavigate();
 
