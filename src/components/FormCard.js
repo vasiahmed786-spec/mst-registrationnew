@@ -4,30 +4,33 @@ export default function FormCard({ title, children }) {
   return (
     <div
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#f5f7fa",
+        maxWidth: 400,
+        margin: "40px auto",
         padding: "20px",
+        border: "1px solid #ddd",
+        borderRadius: 8,
+        boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+        background: "#fff",
+        display: "flex",
+        flexDirection: "column",    // ✅ stack items vertically
+        justifyContent: "flex-start", // ✅ align from top
+        alignItems: "stretch",
       }}
     >
-      <div
-        style={{
-          background: "#fff",
-          padding: "30px 40px",
-          borderRadius: 12,
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-          width: "100%",
-          maxWidth: 400,
-        }}
-      >
-        {title && (
-          <h2 style={{ textAlign: "center", marginBottom: 20 }}>{title}</h2>
-        )}
-        {/* 👇 This ensures content inside actually renders */}
-        <div>{children}</div>
-      </div>
+      {title && (
+        <h2
+          style={{
+            marginBottom: 20,
+            textAlign: "center",
+            fontSize: "1.2em",
+            color: "#333",
+          }}
+        >
+          {title}
+        </h2>
+      )}
+      {/* ✅ Ensure all children (inputs + buttons) display in order */}
+      <div>{children}</div>
     </div>
   );
 }

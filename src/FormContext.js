@@ -1,30 +1,27 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-// Create the context
-export const FormContext = createContext();
+// Create context
+const FormContext = createContext();
 
-// Provider component
-export const FormProvider = ({ children }) => {
-  const [formData, setFormData] = useState({
-    mobile: "",
-    aadhaar: "",
-    fullName: "",
-    country: "",
-    state: "",
-    city: "",
-    address1: "",
-    address2: "",
-    pincode: "",
-    referral: "",
-    password: "",
-    email: "",
-    pan: "",
-    walletAddress: "",
-  });
+// Context provider
+export function FormProvider({ children }) {
+  const [data, setData] = useState({});
+
+  // Function to update form data
+  const update = (values) => {
+    setData((prev) => ({ ...prev, ...values }));
+  };
 
   return (
-    <FormContext.Provider value={{ formData, setFormData }}>
+    <FormContext.Provider value={{ data, update }}>
       {children}
     </FormContext.Provider>
   );
-};
+}
+
+// Hook to use form data
+export function import React, { useContext } from "react";
+import { FormContext } from "../FormContext";() {
+  return import React, { useContext } from "react";
+import { FormContext } from "../FormContext";;
+}

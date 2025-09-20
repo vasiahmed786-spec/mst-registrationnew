@@ -1,14 +1,17 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FormProvider } from "./FormContext";
 
+// Pages
 import MobilePage from "./pages/MobilePage";
 import AadhaarPage from "./pages/AadhaarPage";
 import ProfileFormPage from "./pages/ProfileFormPage";
 import PanCardPage from "./pages/PanCardPage";
 import ProfilePage from "./pages/ProfilePage";
+import AdminLoginPage from "./pages/AdminLoginPage";
+import AdminPage from "./pages/AdminPage";
 
-function App() {
+export default function App() {
   return (
     <FormProvider>
       <Router>
@@ -18,10 +21,10 @@ function App() {
           <Route path="/profile" element={<ProfileFormPage />} />
           <Route path="/pan" element={<PanCardPage />} />
           <Route path="/profile-view" element={<ProfilePage />} />
+          <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </Router>
     </FormProvider>
   );
 }
-
-export default App;

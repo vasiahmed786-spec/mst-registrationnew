@@ -1,21 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FormContext } from "../FormContext";
+import { import React, { useContext } from "react";
+import { FormContext } from "../FormContext"; } from "../FormContext";
 import FormCard from "../components/FormCard";
 import FormInput from "../components/FormInput";
 
 export default function AadhaarPage() {
   const [aadhaar, setAadhaar] = useState("");
-  const { formData, setFormData } = useContext(FormContext);
   const navigate = useNavigate();
+  const { update } = import React, { useContext } from "react";
+import { FormContext } from "../FormContext";();
 
   const onOk = () => {
-  if (!/^\d{12}$/.test(aadhaar)) {
-    alert("Enter a valid 12-digit Aadhaar number");
-    return;
-  }
-    // save to global formData
-    setFormData({ ...formData, aadhaar });
+    if (!aadhaar) {
+      alert("Enter Aadhaar number");
+      return;
+    }
+    update({ aadhaar });
     navigate("/profile");
   };
 
@@ -26,7 +27,6 @@ export default function AadhaarPage() {
         value={aadhaar}
         onChange={(e) => setAadhaar(e.target.value)}
         placeholder="XXXX-XXXX-XXXX"
-         maxLength={12}
       />
       <div style={{ textAlign: "center" }}>
         <button
